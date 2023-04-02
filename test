@@ -1,0 +1,32 @@
+// 点击“显示全部数据”按钮后，更新表格内容
+private void updateTable(List list, final DefaultTableModel dftm) {
+int num = dftm.getRowCount();
+for (int i = 0; i < num; i++)
+dftm.removeRow(0);
+Iterator iterator = list.iterator();
+TbSpinfo spInfo;// 商品信息
+while (iterator.hasNext()) {
+List info = (List) iterator.next();
+Item item = new Item();
+item.setId((String) info.get(0));
+item.setName((String) info.get(1));
+spInfo = Dao.getSpInfo(item);
+Vector rowData = new Vector();
+rowData.add(spInfo.getId().trim());// 商品编号
+rowData.add(spInfo.getSpname().trim());// 商品名称
+rowData.add(spInfo.getJc());// 商品简称
+rowData.add(spInfo.getCd());// 产地
+rowData.add(spInfo.getDw());// 商品计量单位
+rowData.add(spInfo.getGg());// 商品规格
+rowData.add(spInfo.getBz());// 包装
+rowData.add(spInfo.getPh());// 批号
+rowData.add(spInfo.getPzwh());// 批准文号
+rowData.add(spInfo.getGysname());// 供应商名称
+rowData.add(spInfo.getMemo());// 备注
+dftm.addRow(rowData);// 向表格对象添加行数据（商品信息）
+}
+}
+
+
+
+
